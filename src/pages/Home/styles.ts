@@ -44,33 +44,49 @@ export const BannerInfo = styled.div`
 `;
 
 export const StyledShoppingCart = styled(ShoppingCart)`
-  background-color: ${({theme})=> theme['yellow-dark']};
+  background-color: ${({ theme }) => theme['yellow-dark']};
   border-radius: 100%;
-  color: ${({theme}) => theme.white};
+  color: ${({ theme }) => theme.white};
   font-weight: 700;
   padding: 3px;
 `;
 
 export const StyledPackage = styled(Package)`
-  background-color: ${({theme})=> theme['text']};
-  color: ${({theme}) => theme.white};
+  background-color: ${({ theme }) => theme['text']};
+  color: ${({ theme }) => theme.white};
   border-radius: 100%;
   font-weight: 700;
   padding: 3px;
 `;
 
 export const StyledCoffe = styled(Timer)`
-  background-color: ${({theme})=> theme['yellow']};
-  color: ${({theme}) => theme.white};
+  background-color: ${({ theme }) => theme['yellow']};
+  color: ${({ theme }) => theme.white};
   border-radius: 100%;
   font-weight: 700;
   padding: 3px;
 `;
 
 export const StyledTimer = styled(Coffee)`
-  background-color: ${({theme})=> theme['purple']};
+  background-color: ${({ theme }) => theme['purple']};
   border-radius: 100%;
-  color: ${({theme}) => theme.white};
+  color: ${({ theme }) => theme.white};
   font-weight: 700;
   padding: 3px;
+`;
+
+export const ItemsContainer = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  padding: 2rem 10rem;
+`;
+
+export const Section = styled.p`
+  padding: 2rem 10rem;
+  margin-bottom: 2rem;
+  line-height: 130%;
+  font-size: 2rem;
+  font-family: 'Baloo 2', sans-serif;
+  font-weight: 800;
 `;
