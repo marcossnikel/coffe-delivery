@@ -4,7 +4,7 @@ export const CheckoutContainer = styled.div`
   padding: 2rem 10rem;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-
+  gap: 2rem;
   h2 {
     color: ${({ theme }) => theme.subtitle};
     font-family: 'Baloo 2', sans-serif;
@@ -23,7 +23,7 @@ export const PaymentContainer = styled.div`
   flex-direction: column;
   gap:2rem;
 
-  div:last-child{
+  div{
     display: flex;
     gap: 0.75rem;
   }
@@ -48,20 +48,3 @@ export const Info = styled.div`
     flex-direction: column;
   }
 `;
-
-export const PaymentOption = styled.span`
-  padding: 1rem;
-  background-color: ${({theme}) => theme.button};
-  border-radius: 6px;
-  display: flex;
-  color: ${({theme})=> theme.text};
-  font-size: 0.75rem;
-  gap: 0.75rem;
-  align-items: center;
-  flex: 1 1 0;
-  border: 1px solid transparent;
-  &:hover{
-    border: 1px solid ${({theme}) => theme['purple-dark']};
-    background-color: ${({theme}) => theme['purple-light']};
-  }
-`
