@@ -1,10 +1,10 @@
 import banner from '../../../public/images/banner.svg';
 import * as S from './styles';
-import { Card } from './components/Card';
+import { Card } from '../../components/Card';
 import { useCartStore } from '../../store/CartStore';
 
 export function Home() {
-  const items = useCartStore(state => state.avaliableItems);
+  const items = useCartStore(state => state.availableItems);
 
   return (
     <>
