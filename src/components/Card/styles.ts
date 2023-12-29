@@ -38,6 +38,11 @@ export const StyledAddToCartButton = styled(ShoppingCart)`
     transition: 0.2s;
     background-color: ${({ theme }) => theme['purple']};
   }
+
+  &:disabled{
+    cursor: not-allowed;
+    background-color: ${({theme} ) => theme['purple-light']};
+  }
 `;
 
 export const CardFooter = styled.div`

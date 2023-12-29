@@ -4,6 +4,7 @@ export const Container = styled.div`
   display: flex;
   background-color: ${({ theme }) => theme.card};
   gap: 1rem;
+  justify-content: space-between;
   div {
     display: flex;
     flex-direction: column;

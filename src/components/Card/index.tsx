@@ -7,10 +7,11 @@ type CardProps = {
 };
 
 export function Card({ coffe }: CardProps) {
+  
   const [addToCart, decreaseQuantity, increaseQuantity] = useCartStore(
     state => [
       state.addToCart,
-      state.decreaseItemQuantity,
+      state.decrementItemQuantity,
       state.incrementItemQuantity
     ]
   );
@@ -28,11 +29,12 @@ export function Card({ coffe }: CardProps) {
       <S.CardFooter>
         <S.CardPrice>R$ {coffe.price.toFixed(2)}</S.CardPrice>
         <AmountInput
-          decreaseAmount={decreaseQuantity}
-          increaseAmount={increaseQuantity}
+          item={coffe}
+          decreaseAmount={() => decreaseQuantity(coffe)}
+          increaseAmount={() => increaseQuantity(coffe)}
           amount={coffe.quantity}
         />
-        <S.StyledAddToCartButton size={30} onClick={() => addToCart(coffe)} />
+        <S.StyledAddToCartButton aria-disabled={coffe.quantity >= 1} size={30} onClick={() => addToCart(coffe)} />
       </S.CardFooter>
     </S.CardContainer>
   );

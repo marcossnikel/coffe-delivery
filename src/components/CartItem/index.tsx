@@ -3,12 +3,18 @@ import { Item, useCartStore } from '../../store/CartStore';
 import { Container, RemoveButton } from './styles';
 import { AmountInput } from '../Form/AmountInput';
 
-export function CartItem(item: Item) {
+type CartItemProps = {
+  item: Item;
+};
+
+export function CartItem({ item }: CartItemProps) {
+  console.log(item);
+
   const [removeFromCart, increaseQuantity, decreaseQuantity] = useCartStore(
     state => [
       state.removeFromCart,
       state.incrementItemQuantity,
-      state.decreaseItemQuantity
+      state.decrementItemQuantity
     ]
   );
 
@@ -17,14 +23,14 @@ export function CartItem(item: Item) {
       <img src={item.image} alt="" />
       <div>
         <div>
-        <p>{item.title}</p>
-        <span>R$ {item.price.toFixed(2)}</span>
+          <p>{item.title}</p>
         </div>
         <div>
           <AmountInput
+            item={item}
             amount={item.quantity}
-            increaseAmount={increaseQuantity(item)}
-            decreaseAmount={decreaseQuantity(item)}
+            increaseAmount={() => increaseQuantity(item)}
+            decreaseAmount={() => decreaseQuantity(item)}
           />
           <RemoveButton onClick={() => removeFromCart(item.id)}>
             <Trash size={16} />
@@ -32,7 +38,7 @@ export function CartItem(item: Item) {
           </RemoveButton>
         </div>
       </div>
-
+      <span>R$ {item.price.toFixed(2)}</span>
     </Container>
   );
 }

@@ -21,9 +21,9 @@ export const PaymentContainer = styled.div`
   padding: 2.5rem;
   display: flex;
   flex-direction: column;
-  gap:2rem;
+  gap: 2rem;
 
-  div{
+  div {
     display: flex;
     gap: 0.75rem;
   }
@@ -46,5 +46,58 @@ export const Info = styled.div`
     }
     display: flex;
     flex-direction: column;
+  }
+`;
+
+export const CartContainer = styled.div`
+  padding: 2.5rem;
+  display: flex;
+  gap: 2rem;
+  background-color: ${({ theme }) => theme.card};
+  border-radius: 6px 44px;
+  max-width: 28rem;
+  flex-direction: column;
+`;
+
+export const OrderInfoContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  p {
+    font-family: 'Roboto', sans-serif;
+    font-size: 0.875rem;
+    line-height: 130%;
+    color: ${({ theme }) => theme.text};
+    display: flex;
+    justify-content: space-between;
+  }
+
+  p:last-child {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+`;
+
+export const FinishOrderButton = styled.button`
+  border: 1px solid transparent;
+  color: ${({ theme }) => theme.white};
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  line-height: 160%;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  background-color: ${({ theme }) => theme.yellow};
+  text-transform: uppercase;
+  padding: 12px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: stretch;
+  gap: 4px;
+
+  &:hover {
+    background-color: ${({ theme }) => theme['yellow-dark']};
+    color: ${({theme}) => theme.card};
+    cursor: pointer;
   }
 `;

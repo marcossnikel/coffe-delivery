@@ -13,11 +13,12 @@ export type Item = {
 
 type CartStore = {
   cart: Item[];
+  cartValue: number;
   availableItems: Item[];
   addToCart: (item: Item) => void;
   removeFromCart: (id: string) => void;
   incrementItemQuantity: (item: Item) => void;
-  decreaseItemQuantity: (item: Item) => void;
+  decrementItemQuantity: (item: Item) => void;
 };
 
 export const useCartStore = create<CartStore>(set => {
@@ -27,39 +28,62 @@ export const useCartStore = create<CartStore>(set => {
   }));
   return {
     cart: [],
+    cartValue: 0,
     availableItems: initialAvailableItems,
     addToCart: (item: Item) =>
-      set((state: CartStore) => ({ cart: [...state.cart, item] })),
-    removeFromCart: (id: string) =>
       set((state: CartStore) => ({
-        cart: state.cart.filter(item => item.id != id)
+        cart: [...state.cart, item],
       })),
+    removeFromCart: (id: string) =>
+      set((state: CartStore) => {
+        const itemToRemove = state.cart.find(item => item.id === id);
+        if (itemToRemove) {
+          return {
+            cart: state.cart.filter(item => item.id !== id),
+            cartValue: state.cartValue - itemToRemove.price * itemToRemove.quantity
+          };
+        }
+        return state;
+      }),
     incrementItemQuantity: (item: Item) =>
       set((state: CartStore) => {
-        console.log(state,item)
-        const updatedAvailableItems = state.availableItems.map(avItem =>
-          avItem.id === item.id
-            ? { ...avItem, quantity: avItem.quantity + 1 }
-            : avItem
-        );
+        const updatedAvailableItems = state.availableItems.map(avItem => {
+          console.log(avItem.id,item.id);
+          
+          if (avItem.id === item.id) {
+            const updatedQuantity = item.quantity + 1;
+            return { ...item, quantity: updatedQuantity };  
+          }
+          return avItem;
+        });
+
+        const addedItem = updatedAvailableItems.find(avItem => avItem.id === item.id);
+        if (addedItem) {
+          return {
+            availableItems: updatedAvailableItems,
+            cartValue: state.cartValue + addedItem.price
+          };
+        }
         return { availableItems: updatedAvailableItems };
       }),
     decrementItemQuantity: (item: Item) =>
       set((state: CartStore) => {
-        const existingItem = state.availableItems.find(
-          avItem => avItem.id === item.id
-        );
+        const updatedAvailableItems = state.availableItems.map(avItem => {
+          if (avItem.id === item.id && item.quantity > 0) {
+            const updatedQuantity = item.quantity - 1;
+            return { ...item, quantity: updatedQuantity };
+          }
+          return avItem;
+        });
 
-        if (existingItem && existingItem.quantity > 0) {
-          const updatedAvailableItems = state.availableItems.map(avItem =>
-            avItem.id === item.id
-              ? { ...avItem, quantity: avItem.quantity - 1 }
-              : avItem
-          );
-          return { availableItems: updatedAvailableItems };
+        const removedItem = updatedAvailableItems.find(avItem => avItem.id === item.id);
+        if (removedItem) {
+          return {
+            availableItems: updatedAvailableItems,
+            cartValue: state.cartValue - removedItem.price
+          };
         }
-
-        return { availableItems: [...state.availableItems] };
+        return { availableItems: updatedAvailableItems };
       })
   };
 });
