@@ -92,12 +92,16 @@ export const FinishOrderButton = styled.button`
   display: flex;
   align-items: center;
   justify-content: center;
-  align-self: stretch;
   gap: 4px;
 
   &:hover {
     background-color: ${({ theme }) => theme['yellow-dark']};
-    color: ${({theme}) => theme.card};
+    color: ${({ theme }) => theme.card};
     cursor: pointer;
+  }
+
+  a {
+    text-decoration: none;
+    color: ${({ theme }) => theme.white};
   }
 `;

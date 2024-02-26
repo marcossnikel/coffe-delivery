@@ -46,8 +46,8 @@ export const BannerInfo = styled.div`
 export const StyledShoppingCart = styled(ShoppingCart)`
   background-color: ${({ theme }) => theme['yellow-dark']};
   border-radius: 100%;
-  color: ${({ theme }) => theme.white};
   font-weight: 700;
+  color: ${({ theme }) => theme.white};
   padding: 3px;
 `;
 
